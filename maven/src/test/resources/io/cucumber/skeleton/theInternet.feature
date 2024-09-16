@@ -51,13 +51,13 @@ Feature: The Internet
 
   @TEST_TI_0002
   Scenario: Basic Auth allows validated access
-    When the 'Basic Auth' example is opened
-    And I enter username "admin" and password "admin"
+    Given I enter username "admin" and password "admin"
+    And I navigate to the Basic Auth example
     Then I should see the message "Congratulations!"
 
   @TEST_TI_0003
   Scenario: Sortable Data Tables - Example 1 displays the expected 4 results
-    When I navigate to the 'Sortable Data Tables' example
+    When I navigate to the '/tables' example
     Then I should see the table with the following results:
       | Last Name | First Name | Email                 | Due    | Web Site                   |
       | Smith     | John       | jsmith@gmail.com      | $50.00 | http://www.jsmith.com      |
