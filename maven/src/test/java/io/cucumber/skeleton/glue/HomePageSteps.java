@@ -5,6 +5,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.skeleton.core.Context;
 import io.cucumber.skeleton.core.Manager;
+import io.cucumber.skeleton.pages.HomePage;
+import org.junit.Assert;
+import java.util.List;
 
 public class HomePageSteps extends Context {
 
@@ -12,33 +15,26 @@ public class HomePageSteps extends Context {
     super(manager);
   }
 
+  HomePage homePage = new HomePage(manager.getDriver());
+
   @Given("the page under test is {string}")
-  public void the_page_under_test_is(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+  public void the_page_under_test_is(String url) {
+    homePage.openHomePage(url);
   }
 
   @When("I navigate to the homepage")
   public void i_navigate_to_the_homepage() {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    homePage.verifyHomePage();
   }
 
   @Then("I should see a list of expected examples")
   public void i_should_see_a_list_of_expected_examples() {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    homePage.takeScreenshot();
   }
 
   @Then("the following links should be present:")
   public void the_following_links_should_be_present(io.cucumber.datatable.DataTable dataTable) {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    //
-    // For other transformations you can register a DataTableType.
-    throw new io.cucumber.java.PendingException();
+    List<String> expectedLinks = dataTable.asList();
+    Assert.assertTrue("Expected links are not present", homePage.verifyExpectedLinks(expectedLinks));
   }
 }
